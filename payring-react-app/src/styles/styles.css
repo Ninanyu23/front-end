@@ -1,0 +1,72 @@
+/* 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+/* 모바일 웹 서비스 크기 */
+.mobile-container {
+    width: 402px; /* 모든 페이지 동일한 너비 */
+    max-width: 402px; /* 최대 너비 제한 */
+    min-width: 402px; /* 최소 너비 유지 */
+    margin: 0 auto; /* 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; /* 전체 높이를 화면에 맞춤 */
+    background-color: white;
+}
+
+/* 컨텐츠 래퍼 */
+.content-wrapper {
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
+/*     display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 402px;  */
+    flex-grow: 1; /* 컨텐츠가 남은 공간을 차지하도록 설정 */
+}
+
+/* 헤더 고정 */
+.header-container {
+    width: 100%;
+    max-width: 402px;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+/* 전체 컨테이너 */
+.container {
+    padding: 20px !important;
+    background: rgb(255, 255, 255) !important;
+    /* border-radius: 10px !important; */
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    max-width: 402px !important; /* 동일한 크기 유지 */
+    width: 90% !important;
+    margin: auto !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+    flex-grow: 1 !important; /* 컨텐츠가 아래로 확장되도록 설정 */
+    overflow-x: hidden !important; /* 가로 스크롤 방지 */
+}
+
+/* 하단 고정 버튼 */
+.footer-container {
+    width: 100%;
+    max-width: 402px;
+    padding: 10px 0;
+}

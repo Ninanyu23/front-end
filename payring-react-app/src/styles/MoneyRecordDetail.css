@@ -1,0 +1,77 @@
+.money-record-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #08313F;
+    margin-left: 8px;
+}
+
+.money-record-memo {
+    font-size: 16px;
+    color: #333;
+    padding: 10px;
+}
+
+.money-record-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* 이미지 미리보기 */
+.image-preview {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.record-image {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+/* 제목 입력 스타일 유지 */
+.money-record-title-input {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 2px solid #1c2b36;
+    padding: 12px 0;
+    width: 100%;
+    color: #000;
+}
+
+/* 정산 금액 표시 스타일 */
+.money-record-amount-input {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* 메모 스타일 */
+.memo-field {
+    font-size: 16px;
+    color: #000;
+    padding: 12px;
+}
+
+/* 뒤로 가기 버튼 스타일 */
+.back-button {
+    background-color: #08313F;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+/* 버튼 호버 효과 */
+.back-button:hover {
+    background-color: #0a3e4c;
+}
