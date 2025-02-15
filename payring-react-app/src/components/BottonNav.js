@@ -1,3 +1,6 @@
+import React from "react";
+import PageNavigationButton from "./PageNavigate";
+
 import home from "../img/nav-home.png";
 import newchat from "../img/nav-newchat.png";
 import search from "../img/nav-search.png";
@@ -5,24 +8,29 @@ import mypage from "../img/nav-mypage.png";
 
 const BottonNav = () => {
   return (
-    <nav>
-      <button>
-        <img src={home} alt="home icon"></img>
-      </button>
-      <button>
-        <img src={newchat} alt="newchat icon"></img>
-      </button>
-      <button>
-        <img src={search} alt="search icon"></img>
-      </button>
-      <button>
-        <img src={mypage} alt="mypage icon"></img>
-      </button>
+    <nav className="bottom-nav">
+      <PageNavigationButton 
+        label={<img src={home} alt="home icon" />} 
+        to="/main" 
+      />
+      <PageNavigationButton 
+        label={<img src={newchat} alt="newchat icon" />} 
+        to="/create-room" 
+      />
+      <PageNavigationButton 
+        label={<img src={search} alt="search icon" />} 
+        to="/payment-status" 
+      />
+      <PageNavigationButton 
+        label={<img src={mypage} alt="mypage icon" />} 
+        to="/mypage" 
+      />
     </nav>
   );
 };
 
 export default BottonNav;
+
 
 /* import { Home, List, CreditCard, User } from "lucide-react";
 
