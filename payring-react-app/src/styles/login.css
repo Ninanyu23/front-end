@@ -1,78 +1,231 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .guest {
-    margin-bottom: 50px;
-  }
-  
-  .login-container {
-    width: 320px;
-    padding: 40px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  label {
-    font-weight: 900;
-    display: block;
-    text-align: left;
-    margin-top:15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 30px;
-    border: 1px solid black;
-  }
-  
-  .button-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    gap: 10px;
-  }
-  
-  .login-btn{
-    width: 100%;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #D5EDD2;
-    color: black;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 60%;
-    font-weight: bold;
-  }
-  
-  button:hover {
-    background-color: #08313F;
-    color: white;
-  }
-  
-  .PageNavigationButton {
-    background-color: white;
-    color: #08313F;
-    border: 2px solid #08313F;
-  }
-  
-  .PageNavigationButton:hover {
-    background-color: black;
-    color: white;
-  }
-  
-  .error {
-    color: red;
-    font-size: 12px;
-    text-align: center;
-  }
+body{
+  overflow: hidden;
+}
+
+/* 로그인 컨테이너 */
+.login-container {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 402px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 827px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 내부 요소 세로 중앙 정렬 */
+  align-items: center;
+}
+
+/* 라벨 */
+label {
+  font-weight: 900;
+  display: block;
+  text-align: left;
+  margin-top: 15px;
+}
+
+/* 입력 필드 */
+input {
+  width: 250px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 30px;
+  border: 1px solid black;
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* 버튼 기본 스타일 */
+button {
+  padding: 10px;
+  background-color: #D5EDD2;
+  color: black;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 60%;
+  font-weight: bold;
+}
+
+/* 버튼 호버 효과 */
+button:hover {
+  background-color: #08313F;
+  color: white;
+}
+
+/* 페이지 네비게이션 버튼 */
+.PageNavigationButton {
+  background-color: white;
+  color: #08313F;
+  border: 2px solid #08313F;
+}
+
+/* 페이지 네비게이션 버튼 호버 효과 */
+.PageNavigationButton:hover {
+  background-color: black;
+  color: white;
+}
+
+/* 오류 메시지 */
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* 미정산 금액 확인 */
+.unsettlement {
+  width: calc(100% - 40px); /* 전체 width에서 좌우 20px씩 마진 */
+  max-width: 390px; /* max-width 설정 (430px - 40px) */
+  margin: 20px auto;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  border-radius: 12px; /* 모서리 둥글게 */
+}
+
+.unsettlement > h2 {
+  margin-bottom: 0px;
+}
+
+/* 미정산 박스 스타일 */
+.unsettled-box {
+  width: 100%;
+  max-width: 390px;
+  height: 110px; /* 사진 크기 증가 */
+  background-image: url('../img/unsettledBox.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.unsettled-box p {
+  transform: translateY(10px);
+  padding-left: 15px;
+}
+
+.unsettled-box p > strong {
+  font-size: 24px;
+}
+
+/* 다른 메뉴로 이동하기 컴포넌트 스타일링 */
+.title {
+  width: 100%;
+  max-width: 430px;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+/* 네비게이션 스타일 */
+.menu-container {
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.move-menu {
+  width: calc(100% - 40px);
+  max-width: 390px;
+  background-color: null;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 12px;
+}
+
+/* 개별 버튼 스타일 */
+.menu-button {
+  width: 100px;
+  height: 160px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+
+/* 버튼 호버 효과 */
+.menu-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 아이콘 스타일 */
+.menu-button img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 12px;
+}
+
+/* 텍스트 중앙 정렬 */
+.menu-button span {
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 네비게이션 바 스타일 */
+nav {
+  width: 100%;
+  max-width: 402px;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  background: rgb(255, 255, 255);
+  padding: 12px 0;
+  border-top: 1px solid #ddd;
+}
+
+nav button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+nav button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}

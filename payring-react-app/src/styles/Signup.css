@@ -20,6 +20,7 @@
   }
   
   h2 {
+    margin-top: 300px;
     text-align: left; /* 왼쪽 정렬 유지 */
     font-size: 24px; /* 글씨 크기 명확하게 설정 */
     font-weight: bold; /* 두껍게 설정 */
