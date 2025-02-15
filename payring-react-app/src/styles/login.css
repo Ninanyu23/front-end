@@ -1,78 +1,116 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .guest {
-    margin-bottom: 50px;
-  }
-  
-  .login-container {
-    width: 320px;
-    padding: 40px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  label {
-    font-weight: 900;
-    display: block;
-    text-align: left;
-    margin-top:15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 30px;
-    border: 1px solid black;
-  }
-  
-  .button-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    gap: 10px;
-  }
-  
-  .login-btn{
-    width: 100%;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #D5EDD2;
-    color: black;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 60%;
-    font-weight: bold;
-  }
-  
-  button:hover {
-    background-color: #08313F;
-    color: white;
-  }
-  
-  .PageNavigationButton {
-    background-color: white;
-    color: #08313F;
-    border: 2px solid #08313F;
-  }
-  
-  .PageNavigationButton:hover {
-    background-color: black;
-    color: white;
-  }
-  
-  .error {
-    color: red;
-    font-size: 12px;
-    text-align: center;
-  }
+/* 로그인 페이지 */
+.loginpage {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 수직 중앙 정렬 */
+  align-items: center;     /* 가로 중앙 정렬 */
+  height: 100vh;           /* 화면 높이에 맞춰서 전체 높이 차지 */
+  padding-bottom: 10%;     /* 아래 여백을 줄여 폼이 좀 더 상단으로 올라오도록 조정 */
+}
+
+/* 전체 내용 감싸는 컨테이너 */
+.login-container .content-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;  /* 가로 중앙 정렬 */
+  align-items: center;      /* 세로 중앙 정렬 */
+  flex-direction: column;   /* 세로로 배치 */
+  padding: 20px;
+  overflow-x: hidden;       /* 가로 넘침을 숨기기 */
+}
+
+.guest{
+  margin-bottom: 30px;
+}
+
+/* mobile-container 스타일 */
+.login-container .mobile-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;     /* 세로 중앙 정렬 */
+  height: 100vh;           /* 화면 전체 높이를 차지 */
+}
+
+/* 전체 로그인 폼을 감싸는 form-container */
+.form-container {
+  width: 170%;
+  max-width: 400px;  /* 폼의 최대 너비 설정 */
+  margin-bottom: 30px;
+}
+
+/* 입력 필드 크기 조정 */
+#email,
+#password {
+  margin-top: 7px;
+  margin-bottom: 15px; /* 버튼과의 간격을 맞추기 위해 margin-bottom 조정 */
+  width: 100%; /* 입력 필드의 가로 길이를 늘림 */
+  border-radius: 30px;
+  border: 1px solid black;
+}
+
+/* 버튼 컨테이너 추가 여백 */
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 로그인 버튼 스타일 */
+.login-btn {
+  margin-bottom: 20px;
+  background-color: #08313F;
+  color: white;
+  width: 70%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+  color: black;
+  background-color: #D5EDD2;
+}
+
+/* 페이지 이동 버튼 스타일 */
+.PageNavigationButton {
+  margin-bottom: 20px;
+  background-color: white;
+  color: #08313F;
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #08313F;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.PageNavigationButton:hover {
+  background-color: #08313F;
+  color: white;
+}
+
+/* 이메일과 비밀번호 라벨 왼쪽 정렬 */
+label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: black;
+}
+
+/* 에러 메시지 스타일 */
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}

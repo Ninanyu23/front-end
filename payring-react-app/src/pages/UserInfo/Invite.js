@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/invite.css';
+import '../../styles/invite.css';
+import "../../styles/styles.css";
+import Header from "../../components/Header";
 
 const Invite = () => {
     const [invites, setInvites] = useState([]);
@@ -110,27 +112,34 @@ const Invite = () => {
     };
 
     return (
-        <div className="invite-container">
-            <h2>방 초대 내역</h2>
+        <div className='mobile-container'>
+            <div className="header-wrapper">
+                <Header />
+            </div>
+            <div className='content-wrapper'>
+                <div className="invite-container">
+                    <h2>방 초대 내역</h2>
 
-            {error && <p className="error-message">{error}</p>}
+                    {error && <p className="error-message">{error}</p>}
 
-            {invites.length === 0 ? (
-                <p className="no-invites">받은 초대가 없습니다.</p>
-            ) : (
-                invites.map(invite => (
-                    <div key={invite.id} className="invite-card">
-                        <div className="invite-info">
-                            <p className="room-name"><strong>{invite.roomName}</strong></p>
-                            <p className="member-count">참여 인원 {invite.members}명</p>
-                        </div>
-                        <div className="invite-buttons">
-                            <button className="accept-btn" onClick={() => handleAccept(invite.id)}>수락</button>
-                            <button className="reject-btn" onClick={() => handleReject(invite.id)}>거절</button>
-                        </div>
-                    </div>
-                ))
-            )}
+                    {invites.length === 0 ? (
+                        <p className="no-invites">받은 초대가 없습니다.</p>
+                    ) : (
+                        invites.map(invite => (
+                            <div key={invite.id} className="invite-card">
+                                <div className="invite-info">
+                                    <p className="room-name"><strong>{invite.roomName}</strong></p>
+                                    <p className="member-count">참여 인원 {invite.members}명</p>
+                                </div>
+                                <div className="invite-buttons">
+                                    <button className="accept-btn" onClick={() => handleAccept(invite.id)}>수락</button>
+                                    <button className="reject-btn" onClick={() => handleReject(invite.id)}>거절</button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
