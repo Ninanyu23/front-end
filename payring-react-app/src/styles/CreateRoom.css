@@ -1,0 +1,151 @@
+@import "./styles.css"; /* 공통 스타일 불러오기 */
+
+
+/* 방 생성 컨테이너 */
+.container {
+    padding: 20px;
+    background: white;
+/*     border-radius: 10px; */
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 컨테이너 */
+/* .title-container {
+    margin-bottom: 10px;
+} */
+
+/* 팀원 초대 문구 스타일 */
+.team-invite {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.team-invite .inline-text {
+    font-size: 14px;
+    color: #666;
+    margin-top: -3px;
+}
+
+/* 제목 스타일 */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* 입력 필드 스타일 */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D5EDD2;
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* 이메일 입력창 */
+.email-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #D5EDD2;
+    border-radius: 50px;
+    padding: 6px;
+    background-color: white;
+    width: calc(100% - 10px);
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.email-container input {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+/* 검색 아이콘 */
+.email-container .search-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* 방 이미지 등록 (클릭하면 파일 업로드 실행) */
+.file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.file-upload img {
+    width: 134px;
+    height: 134px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+/* 숨겨진 파일 업로드 버튼 */
+.file-upload input {
+    display: none;
+}
+
+/* 이메일 리스트 */
+.email-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* 이메일 해시태그 스타일 */
+.email-item {
+    display: flex;
+    align-items: center ;
+    background: white ;
+    border: 1px solid #aaa ;
+    padding: 6px 12px ;
+    border-radius: 20px ;
+    font-size: 14px ;
+    font-weight: normal ;
+    color: black ;
+}
+
+/* 이메일 삭제 버튼 */
+.email-item .delete-icon {
+    margin-left: 6px;
+    cursor: pointer;
+    color: black;
+}
+
+/* 방 생성 버튼 */
+.primary-button {
+    background-color: #08313F;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.primary-button:hover {
+    background-color: #062A36;
+}

@@ -1,0 +1,234 @@
+@import url('./styles.css');
+
+/* 페이지 제목 (유저 이름 포함) */
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+
+.subtitle{
+    font-size: 16px;
+}
+
+.total-amount {
+    margin-top: 0;
+}
+
+/* 강조된 총 금액 */
+.highlight-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1c3d52;
+}
+
+/* 정산 리스트 */
+.start-settlement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* ✅ 리스트 간격 추가 */
+    margin-top: 10px;
+}
+
+/* 정산 개별 항목 */
+.start-settlement-item {
+    display: flex;
+    align-items: center ;
+    justify-content: space-between; 
+    padding: 8px 10px;
+    border-radius: 30px; 
+    border: 1px solid #D5EDD2; 
+    background: white ;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05) ;
+    width: 100%;
+    max-width: 100%; /* ✅ 중앙 정렬을 위해 최대 너비 설정 */
+    margin: 0 auto; /* ✅ 아이템 중앙 정렬 */
+    gap: 10px; /* ✅ 내부 요소 간격 조정 */
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.start-settlement-item p {
+    margin: 0;
+}
+
+/* 정산 항목 내부 */
+.start-settlement-content { 
+    padding-left: 5px;
+    justify-content: space-between; /* ✅ 이름과 금액 간격 균등 배치 */
+}
+
+/* 유저 이름 */
+.user-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 20px; /* ✅ 이름과 금액 간격 추가 */
+}
+
+/* 금액 스타일 */
+.list-amount {
+    font-size: 16px;
+    color: #333;
+}
+
+/* ✅ 버튼 공통 스타일 */
+.start-settlement-button,
+.start-reminder-button {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* ✅ 정산 보내기 버튼 */
+.start-settlement-button {
+    background-color: #08313F;
+    color: white;
+}
+
+.start-settlement-button:hover {
+    background-color: #07272f;
+}
+
+/* ✅ 독촉하기 버튼 */
+.start-reminder-button {
+    background-color: #08313F; /* ✅ 같은 색상으로 적용 */
+    color: white;
+}
+
+.start-reminder-button:hover {
+    background-color: #07272f;
+}
+
+/* 비어 있는 리스트 메시지 */
+.empty-message {
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/* ✅ 프로필 스타일 */
+.completed-members, .pending-members {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-image {
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.amount {
+    border: red;
+    border-radius: 16px;
+    font-size: 12px;
+    color: red;
+    margin-top: 4px;
+}
+
+.reminder-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.team-list-title {
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+.user-name-in-list{
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+
+/* ✅ 기본 텍스트 버튼 스타일 */
+.text-button {
+    font-size: 14px; /* ✅ 크기 설정 */
+    color: black; /* ✅ 기본 색상 */
+    cursor: pointer; /* ✅ 클릭 가능하게 설정 */
+    display: block; /* ✅ 줄 바꿈 처리 */
+    text-align: center; /* ✅ 가운데 정렬 */
+    margin-top: 10px; /* ✅ 리스트와 간격 추가 */
+}
+
+.page-title-list {
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+/* ✅ 모달 배경 (반투명) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* ✅ 모달 컨테이너 */
+.modal-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ 닫기 버튼 */
+.modal-close-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    background: #08313F;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.clear > img {
+    display: block;
+    margin: 0 auto;
+}
+.clear > p {
+    font-weight: bold;
+    color: #000000;
+}
