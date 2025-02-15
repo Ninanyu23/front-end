@@ -71,18 +71,18 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-  
+
     // 이메일 인증 확인
     if (!isVerified) {
       setError('이메일 인증을 완료해주세요.');
       return;
     }
-  
+
     if (password !== confirmPassword) {
       setError('비밀번호가 일치하지 않습니다.');
       return;
     }
-  
+
     const payload = {
       userName,
       email,
@@ -91,7 +91,7 @@ const Signup = () => {
       payUrl,
       accounts,
     };
-  
+
     try {
       const response = await fetch('https://storyteller-backend.site/api/auth/signup', {
         method: 'POST',
@@ -100,15 +100,15 @@ const Signup = () => {
         },
         body: JSON.stringify(payload),
       });
-  
+
       const data = await response.json();
-  
+
       // 403 Forbidden 응답 처리
       if (response.status === 403) {
         setError(data.message || '접근 권한이 없습니다.');
         return;
       }
-  
+
       if (data.code === 'SUCCESS_SIGNUP') {
         alert('회원가입 성공!');
         window.location.href = '/';
@@ -142,7 +142,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h2>회원가입</h2>
+      <h2 className='signup'>회원가입</h2>
       <form onSubmit={handleSignup}>
         <label htmlFor="userName">이름</label>
         <div className="input-group">
@@ -267,8 +267,11 @@ const Signup = () => {
         <label>프로필 사진</label>
         <div className="file-upload">
           <label htmlFor="profileImage" className="file-upload-label">
-            <span className="material-symbols-outlined">image</span>
+            <span className="material-symbols-outlined">
+              image
+            </span>
           </label>
+
           <input
             type="file"
             id="profileImage"
@@ -277,16 +280,16 @@ const Signup = () => {
             onChange={handleProfileImageChange}
           />
         </div>
-        {profileImage && (
+        {profileImage ? (
           <img
             src={URL.createObjectURL(profileImage)}
             alt="Profile"
             className="profile-image-preview"
           />
-        )}
+        ) : null}
 
         {error && <p className="error">{error}</p>}
-        <button type="submit">회원가입</button>
+        <button className="sign-btn" type="submit">회원가입</button>
       </form>
     </div>
   );
