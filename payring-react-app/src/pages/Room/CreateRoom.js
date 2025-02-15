@@ -25,42 +25,10 @@ function CreateRoom() {
         }
     };
 
-    // 🔹 이메일 검색하여 유저가 존재하는 경우만 추가
-    const searchUserByEmail = async (email) => {
-        try {
-            const response = await fetch(`https://storyteller-backend.site/api/users?email=${encodeURIComponent(email)}`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
-
-            if (!response.ok) {
-                console.error("❌ 사용자 검색 API 실패:", response.status);
-                return false;
-            }
-
-            const data = await response.json();
-            console.log("🔹 사용자 검색 응답:", data);
-
-            // API 응답 구조에 맞춰 존재 여부 판단
-            return data.exists !== undefined ? data.exists : !!data.user;
-        } catch (error) {
-            console.error("❌ 사용자 검색 오류:", error);
-            return false;
-        }
-    };
-
-    // 🔹 이메일 리스트에 추가 (유저 확인 후)
-    const addEmailToList = async () => {
+    // 🔹 이메일 리스트에 추가 (조회 없이 바로 추가)
+    const addEmailToList = () => {
         if (teamEmails.includes(email)) {
             alert("이미 추가된 이메일입니다.");
-            return;
-        }
-
-        const userExists = await searchUserByEmail(email);
-        if (!userExists) {
-            alert("해당 이메일의 사용자가 존재하지 않습니다.");
             return;
         }
 
@@ -116,9 +84,8 @@ function CreateRoom() {
             setRoomId(data.data.roomId);
             alert("방이 성공적으로 생성되었습니다!");
 
-            // ✅ 팀원 초대 실행
+            // ✅ 팀원 초대 실행 (조회 없이 바로 실행)
             inviteMembers(data.data.roomId);
-            fetchRoomMembers(data.data.roomId);
 
             navigate(`/room-detail/${data.data.roomId}`);
         } catch (error) {
@@ -127,79 +94,43 @@ function CreateRoom() {
         }
     };
 
- // 🔹 방 멤버 조회 API 호출 (개선)
-const fetchRoomMembers = async (roomId) => {
-  if (!roomId) {
-      console.error("❌ 방 ID가 없습니다.");
-      return;
-  }
+    // 🔹 팀원 초대 API 호출 (조회 없이 바로 실행)
+    const inviteMembers = async (roomId) => {
+        if (!roomId || teamEmails.length === 0) return;
 
-  try {
-      const response = await fetch(`https://storyteller-backend.site/api/rooms/${roomId}/members`, {
-          method: "GET",
-          headers: {
-              "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          },
-      });
+        try {
+            const inviteRequests = teamEmails.map(email =>
+                fetch(`https://storyteller-backend.site/api/rooms/${roomId}/invite`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({ roomId, email }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`팀원 초대 실패: ${email}`);
+                    }
+                    return response.json();
+                })
+            );
 
-      if (!response.ok) {
-          throw new Error(`팀원 목록 조회 실패: HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
-      if (!result.data) {
-          throw new Error("팀원 목록 데이터가 없습니다.");
-      }
-
-      console.log("✅ 팀원 목록 조회 성공:", result.data);
-      setTeamMembers(result.data); // 멤버 목록 업데이트
-  } catch (error) {
-      console.error("❌ 팀원 목록 조회 오류:", error);
-      setTeamMembers([]); // 실패 시 빈 배열 유지
-  }
-};
-
-// 🔹 팀원 초대 API 호출 (개선)
-const inviteMembers = async (roomId) => {
-  if (!roomId || teamEmails.length === 0) return;
-
-  try {
-      const inviteRequests = teamEmails.map(email =>
-          fetch(`https://storyteller-backend.site/api/rooms/${roomId}/invite`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${localStorage.getItem("token")}`,
-              },
-              body: JSON.stringify({ roomId, email }),
-          })
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error(`팀원 초대 실패: ${email}`);
-              }
-              return response.json();
-          })
-      );
-
-      // 모든 초대 요청을 병렬 실행
-      await Promise.all(inviteRequests);
-      console.log("✅ 모든 팀원 초대 성공!");
-      alert("팀원 초대가 완료되었습니다!");
-
-      // 초대 후 팀원 목록 새로고침
-      fetchRoomMembers(roomId);
-  } catch (error) {
-      console.error("❌ 팀원 초대 오류:", error);
-      alert("일부 팀원 초대에 실패했습니다.");
-  }
-};
-
+            // 모든 초대 요청을 병렬 실행
+            await Promise.all(inviteRequests);
+            console.log("✅ 모든 팀원 초대 성공!");
+            alert("팀원 초대가 완료되었습니다!");
+        } catch (error) {
+            console.error("❌ 팀원 초대 오류:", error);
+            alert("일부 팀원 초대에 실패했습니다.");
+        }
+    };
 
     return (
         <div className="mobile-container">
-          <div className="header-wrapper">
-            <Header />
-          </div>
+            <div className="header-wrapper">
+                <Header />
+            </div>
             <div className="content-wrapper">
                 <div className="container">
                     <h2 className="section-title">방 이름</h2>
