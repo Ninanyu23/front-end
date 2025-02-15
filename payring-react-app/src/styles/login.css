@@ -1,155 +1,116 @@
-body{
-  padding: 20px !important;
-  background: rgb(255, 255, 255) !important;
-  /* border-radius: 10px !important; */
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  max-width: 402px !important; /* 동일한 크기 유지 */
-  width: 90% !important;
-  margin: auto !important;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
-  flex-grow: 1 !important; /* 컨텐츠가 아래로 확장되도록 설정 */
-  overflow:hidden;
-}
-
-/* 로그인 컨테이너 */
-.login-container {
-  border-radius: 8px;
-  text-align: center;
-  background-color: white;
+/* 로그인 페이지 */
+.loginpage {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 내부 요소 세로 중앙 정렬 */
-  align-items: center;
+  justify-content: center; /* 수직 중앙 정렬 */
+  align-items: center;     /* 가로 중앙 정렬 */
+  height: 100vh;           /* 화면 높이에 맞춰서 전체 높이 차지 */
+  padding-bottom: 10%;     /* 아래 여백을 줄여 폼이 좀 더 상단으로 올라오도록 조정 */
 }
 
-/* 라벨 */
-label {
-  font-weight: 900;
-  display: block;
-  text-align: left;
-  margin-top: 15px;
+/* 전체 내용 감싸는 컨테이너 */
+.login-container .content-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;  /* 가로 중앙 정렬 */
+  align-items: center;      /* 세로 중앙 정렬 */
+  flex-direction: column;   /* 세로로 배치 */
+  padding: 20px;
+  overflow-x: hidden;       /* 가로 넘침을 숨기기 */
 }
 
-/* 입력 필드 */
-input {
-  width: 250px;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
+.guest{
+  margin-bottom: 30px;
+}
+
+/* mobile-container 스타일 */
+.login-container .mobile-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;     /* 세로 중앙 정렬 */
+  height: 100vh;           /* 화면 전체 높이를 차지 */
+}
+
+/* 전체 로그인 폼을 감싸는 form-container */
+.form-container {
+  width: 170%;
+  max-width: 400px;  /* 폼의 최대 너비 설정 */
+  margin-bottom: 30px;
+}
+
+/* 입력 필드 크기 조정 */
+#email,
+#password {
+  margin-top: 7px;
+  margin-bottom: 15px; /* 버튼과의 간격을 맞추기 위해 margin-bottom 조정 */
+  width: 100%; /* 입력 필드의 가로 길이를 늘림 */
   border-radius: 30px;
   border: 1px solid black;
 }
 
-/* 버튼 컨테이너 */
+/* 버튼 컨테이너 추가 여백 */
 .button-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
 }
 
-/* 로그인 버튼 */
+/* 로그인 버튼 스타일 */
 .login-btn {
-  margin-top: 30px;
-  width: 100%;
+  margin-bottom: 20px;
+  background-color: #08313F;
+  color: white;
+  width: 70%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.login-btn:hover {
+  color: black;
+  background-color: #D5EDD2;
+}
 
-/* 페이지 네비게이션 버튼 */
+/* 페이지 이동 버튼 스타일 */
 .PageNavigationButton {
+  margin-bottom: 20px;
   background-color: white;
   color: #08313F;
-  border: 2px solid #08313F;
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #08313F;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* 페이지 네비게이션 버튼 호버 효과 */
 .PageNavigationButton:hover {
-  background-color: black;
+  background-color: #08313F;
   color: white;
 }
 
-/* 오류 메시지 */
+/* 이메일과 비밀번호 라벨 왼쪽 정렬 */
+label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: black;
+}
+
+/* 에러 메시지 스타일 */
 .error {
   color: red;
   font-size: 12px;
   text-align: center;
-}
-
-/* 미정산 금액 확인 */
-.unsettlement {
-  width: calc(100% - 40px); /* 전체 width에서 좌우 20px씩 마진 */
-  max-width: 390px; /* max-width 설정 (430px - 40px) */
-  margin: 20px auto;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  border-radius: 12px; /* 모서리 둥글게 */
-}
-
-.unsettlement > h2 {
-  margin-bottom: 0px;
-}
-
-/* 미정산 박스 스타일 */
-.unsettled-box {
-  width: 100%;
-  max-width: 390px;
-  height: 110px; /* 사진 크기 증가 */
-  background-image: url('../img/unsettledBox.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: left;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  padding-left: 10px;
-  padding-bottom: 10px;
-}
-
-.unsettled-box p {
-  transform: translateY(10px);
-  padding-left: 15px;
-}
-
-.unsettled-box p > strong {
-  font-size: 24px;
-}
-
-/* 다른 메뉴로 이동하기 컴포넌트 스타일링 */
-.title {
-  width: 100%;
-  max-width: 430px;
-  height: 60px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: rgb(255, 255, 255);
-  font-weight: bold;
-  font-size: 18px;
-  padding-left: 20px;
-}
-
-/* 네비게이션 스타일 */
-.menu-container {
-  width: 100%;
-  max-width: 430px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 0;
-}
-
-.move-menu {
-  width: calc(100% - 40px);
-  max-width: 390px;
-  background-color: null;
-  padding: 20px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  border-radius: 12px;
 }

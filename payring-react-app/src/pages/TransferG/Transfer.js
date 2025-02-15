@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../styles/transfer.css";
+import "../../styles/transfer.css";
+import "../../styles/styles.css";
+import Header from "../../components/Header";
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -27,20 +28,26 @@ const Transfer = () => {
       const token = getCookie("token"); // 쿠키에서 token 가져오기
       console.log("Token:", token); // token 값 확인
 
-      const response = await axios.get(`/api/users`, {
+      const response = await fetch("/api/users", {
+        method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`, // Authorization 헤더에 token 포함
-        }
+        },
       });
 
-      if (response.data) {
-        setUserInfo(response.data); // 사용자 정보 설정
+      if (!response.ok) {
+        throw new Error("사용자 정보를 불러오는 데 오류가 발생했습니다.");
+      }
+
+      const data = await response.json();
+      if (data) {
+        setUserInfo(data); // 사용자 정보 설정
       } else {
         alert("사용자 정보를 불러오는데 실패했습니다.");
       }
     } catch (error) {
-      console.error("Error fetching user info:", error.response || error);
-      alert("사용자 정보를 불러오는 데 오류가 발생했습니다.");
+      console.error("Error fetching user info:", error);
+      alert(error.message || "사용자 정보를 불러오는 데 오류가 발생했습니다.");
     }
   };
 
@@ -50,28 +57,34 @@ const Transfer = () => {
       const token = getCookie("token"); // 쿠키에서 token 가져오기
       console.log("Token:", token); // token 값 확인
 
-      const response = await axios.get(`/api/rooms/transfers/${userInfo.transferId}/receiver-info`, {
+      const response = await fetch(`/api/rooms/transfers/${userInfo.transferId}/receiver-info`, {
+        method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`, // Authorization 헤더에 token 포함
-        }
+        },
       });
 
-      if (response.data.code === "SUCCESS_CREATE_TEMP") {
-        const { roomId, roomName, userId, username, payUrl, accounts } = response.data.data;
+      if (!response.ok) {
+        throw new Error("송금 정보를 불러오는 데 오류가 발생했습니다.");
+      }
+
+      const data = await response.json();
+      if (data.code === "SUCCESS_CREATE_TEMP") {
+        const { roomId, roomName, userId, username, payUrl, accounts } = data.data;
         setInviteData({
           roomId,
           roomName,
           userId,
           username,
           payUrl,
-          accounts
+          accounts,
         });
       } else {
         alert("송금 정보를 불러오는데 실패했습니다.");
       }
     } catch (error) {
-      console.error("Error fetching receiver info:", error.response || error);
-      alert("송금 정보를 불러오는 데 오류가 발생했습니다.");
+      console.error("Error fetching receiver info:", error);
+      alert(error.message || "송금 정보를 불러오는 데 오류가 발생했습니다.");
     }
   };
 
@@ -89,7 +102,6 @@ const Transfer = () => {
   };
 
   // Canvas를 사용하여 300x300 크기로 맞춤 처리
-  // Canvas를 사용하여 정사각형(가로 맞춤)으로 크롭 처리
   const createCanvasImage = (imageSrc) => {
     const img = new Image();
     img.src = imageSrc;
@@ -139,18 +151,27 @@ const Transfer = () => {
 
     try {
       const token = getCookie("token"); // 쿠키에서 token 가져오기
-      const response = await axios.post(`/api/rooms/transfers/${userInfo.transferId}/verify`, formData, {
-        headers: { "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}` },
+      const response = await fetch(`/api/rooms/transfers/${userInfo.transferId}/verify`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+        body: formData,
       });
 
-      if (response.data.code === "SUCCESS_VERIFY_TRANSFER" && response.data.data.isComplete) {
+      if (!response.ok) {
+        throw new Error(`송금 인증 요청 중 오류 발생: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      if (data.code === "SUCCESS_VERIFY_TRANSFER" && data.data.isComplete) {
         alert("송금 인증 성공!");
         navigate("/mypage"); // 성공 시 페이지 이동
       } else {
-        alert(`송금 인증 실패: ${response.data.message || '상태 확인 필요'}`);
+        alert(`송금 인증 실패: ${data.message || '상태 확인 필요'}`);
       }
     } catch (error) {
-      alert(`송금 인증 요청 중 오류 발생: ${error.response?.data?.message || error.message}`);
+      alert(error.message || "송금 인증 요청 중 오류 발생");
     }
   };
 
@@ -165,49 +186,54 @@ const Transfer = () => {
   }, [userInfo]);
 
   return (
-    <div className="transfer-page">
-      <p className="room-name">{inviteData.roomName}</p>
-      <h3>{inviteData.username} 님께</h3>
-      <p>송금해야 하는 금액<strong> {userInfo.amount && userInfo.amount.toLocaleString()}원</strong></p>
-
-      {inviteData.payUrl && (
-        <button
-          onClick={() => window.location.href = inviteData.payUrl}
-          className="kakao-btn"
-        >
-          <img src="https://i.namu.wiki/i/DRTBUHA314XYTx-pkzY4XSmQ0Job0j10vQhiETotjLCGUULQemriSC67Yh9UCsYq7Dw7WyvK0GkP9f3jP8r8gA.svg" alt="카카오 로고" className="kakao-logo" />
-          카카오로 송금하기
-        </button>
-      )}
-
-      <p className="or-text">또는</p>
-
-      <div className="bank-info">
-        {inviteData.accounts && inviteData.accounts.map((account, index) => (
-          <div key={index}>
-            <span className="bank-name">{account.bankName}</span>
-            <span className="account-number">{account.accountNo}</span>
-            <span className="account-holder">{account.receiver}</span>
-          </div>
-        ))}
+    <div className='mobile-container'>
+      <div className="header-wrapper">
+        <Header />
       </div>
+      <div className="transfer-page">
+        <p className="room-name">{inviteData.roomName}</p>
+        <h3>{inviteData.username} 님께</h3>
+        <p>송금해야 하는 금액<strong> {userInfo.amount && userInfo.amount.toLocaleString()}원</strong></p>
 
-      {/* 이미지 업로드 아이콘만 표시 */}
-      <div className="upload-section">
-        <label htmlFor="file-upload" className="upload-icon">
-          <span className="material-symbols-outlined">image</span>
-        </label>
-        <input
-          type="file"
-          id="file-upload"
-          accept="image/*"
-          onChange={handleImageUpload}
-          style={{ display: 'none' }}  // 파일 선택창이 바로 나타나도록
-        />
-        {image && <img src={image} alt="송금 내역" className="preview-image" />}
+        {inviteData.payUrl && (
+          <button
+            onClick={() => window.location.href = inviteData.payUrl}
+            className="kakao-btn"
+          >
+            <img src="https://i.namu.wiki/i/DRTBUHA314XYTx-pkzY4XSmQ0Job0j10vQhiETotjLCGUULQemriSC67Yh9UCsYq7Dw7WyvK0GkP9f3jP8r8gA.svg" alt="카카오 로고" className="kakao-logo" />
+            카카오로 송금하기
+          </button>
+        )}
+
+        <p className="or-text">또는</p>
+
+        <div className="bank-info">
+          {inviteData.accounts && inviteData.accounts.map((account, index) => (
+            <div key={index}>
+              <span className="bank-name">{account.bankName}</span>
+              <span className="account-number">{account.accountNo}</span>
+              <span className="account-holder">{account.receiver}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* 이미지 업로드 아이콘만 표시 */}
+        <div className="upload-section">
+          <label htmlFor="file-upload" className="upload-icon">
+            <span className="material-symbols-outlined">image</span>
+          </label>
+          <input
+            type="file"
+            id="file-upload"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}  // 파일 선택창이 바로 나타나도록
+          />
+          {image && <img src={image} alt="송금 내역" className="preview-image" />}
+        </div>
+
+        <button onClick={handleTransfer} className="transfer-btn">송금 완료</button>
       </div>
-
-      <button onClick={handleTransfer} className="transfer-btn">송금 완료</button>
     </div>
   );
 };

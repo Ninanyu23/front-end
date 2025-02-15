@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; // 추가
 import '../../styles/Signup.css';
+import "../../styles/styles.css";
 
 const Signup = () => {
   const [userName, setUserName] = useState(''); // 이름 필드명 변경
@@ -141,156 +142,160 @@ const Signup = () => {
   }, [profileImage, profileImageUrl]);
 
   return (
-    <div className="signup-container">
-      <h2 className='signup'>회원가입</h2>
-      <form onSubmit={handleSignup}>
-        <label htmlFor="userName">이름</label>
-        <div className="input-group">
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="이름을 입력하세요"
-            required
-            autoComplete="name"
-          />
-        </div>
-
-        <label htmlFor="email">이메일</label>
-        <div className="input-group">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="이메일을 입력하세요"
-            required
-            disabled={isVerified}
-            autoComplete="email"
-          />
-          <button type="button" className="send-code-btn" onClick={handleSendVerificationCode}>
-            인증번호
-          </button>
-        </div>
-
-        <div className="input-group">
-          <input
-            type="text"
-            id="verificationCode"
-            name="verificationCode"
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-            placeholder="인증번호를 입력하세요"
-            required
-            autoComplete="off"
-          />
-          <button type="button" className="verify-code-btn" onClick={handleVerifyCode}>
-            인증확인
-          </button>
-        </div>
-
-        <label htmlFor="password">비밀번호</label>
-        <div className="input-group">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="비밀번호 입력 (8~16자리)"
-            minLength={8}
-            maxLength={16}
-            required
-            autoComplete="new-password"
-          />
-        </div>
-
-        <label htmlFor="confirmPassword">비밀번호 확인</label>
-        <div className="input-group">
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="비밀번호 재입력"
-            minLength={8}
-            maxLength={16}
-            required
-            autoComplete="off"
-          />
-        </div>
-
-        <label>송금 받을 은행명 & 계좌번호</label>
-        <div className="bank-accounts-container">
-          {accounts.map((account, index) => (
-            <div key={index} className="input-group bank-input-group">
+    <div className='sign-container'>
+      <div className='mobile-container'>
+        <div className="signpage">
+          <h2 className='signup'>회원가입</h2>
+          <form className="content-container" onSubmit={handleSignup}>
+            <label className="form-label" htmlFor="userName">이름</label>
+            <div className="input-group">
               <input
                 type="text"
-                className='bank-name-input'
-                name={`bankName-${index}`}
-                value={account.bankName}
-                onChange={(e) => handleBankChange(index, 'bankName', e.target.value)}
-                placeholder="은행명"
+                id="userName"
+                name="userName"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="이름을 입력하세요"
+                required
+                autoComplete="name"
+              />
+            </div>
+
+            <label className="form-label" htmlFor="email">이메일</label>
+            <div className="input-group">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="이메일을 입력하세요"
+                required
+                disabled={isVerified}
+                autoComplete="email"
+              />
+              <button type="button" className="send-code-btn" onClick={handleSendVerificationCode}>
+                인증번호
+              </button>
+            </div>
+
+            <div className="input-group">
+              <input
+                type="text"
+                id="verificationCode"
+                name="verificationCode"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+                placeholder="인증번호를 입력하세요"
+                required
                 autoComplete="off"
               />
+              <button type="button" className="verify-code-btn" onClick={handleVerifyCode}>
+                인증확인
+              </button>
+            </div>
+
+            <label className="form-label" htmlFor="password">비밀번호</label>
+            <div className="input-group">
               <input
-                type="text"
-                className='account-number-input'
-                name={`accountNo-${index}`}
-                value={account.accountNo}
-                onChange={(e) => handleBankChange(index, 'accountNo', e.target.value)}
-                placeholder="계좌번호"
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="비밀번호 입력 (8~16자리)"
+                minLength={8}
+                maxLength={16}
+                required
+                autoComplete="new-password"
+              />
+            </div>
+
+            <label className="form-label" htmlFor="confirmPassword">비밀번호 확인</label>
+            <div className="input-group">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="비밀번호 재입력"
+                minLength={8}
+                maxLength={16}
+                required
                 autoComplete="off"
               />
             </div>
-          ))}
-          <button type="button" onClick={handleAddBankAccount} className="add-account-btn">
-            + 계좌번호 추가하기
-          </button>
+
+            <label className="form-label">송금 받을 은행명 & 계좌번호</label>
+            <div className="bank-accounts-container">
+              {accounts.map((account, index) => (
+                <div key={index} className="input-group bank-input-group">
+                  <input
+                    type="text"
+                    className='bank-name-input'
+                    name={`bankName-${index}`}
+                    value={account.bankName}
+                    onChange={(e) => handleBankChange(index, 'bankName', e.target.value)}
+                    placeholder="은행명"
+                    autoComplete="off"
+                  />
+                  <input
+                    type="text"
+                    className='account-number-input'
+                    name={`accountNo-${index}`}
+                    value={account.accountNo}
+                    onChange={(e) => handleBankChange(index, 'accountNo', e.target.value)}
+                    placeholder="계좌번호"
+                    autoComplete="off"
+                  />
+                </div>
+              ))}
+              <button type="button" onClick={handleAddBankAccount} className="add-account-btn">
+                + 계좌번호 추가하기
+              </button>
+            </div>
+
+            <label className="form-label" htmlFor="payUrl">카카오페이 송금 링크(URL)</label>
+            <input
+              type="url"
+              id="payUrl"
+              name="payUrl"
+              value={payUrl}
+              onChange={(e) => setPayUrl(e.target.value)}
+              placeholder="카카오페이 링크"
+              autoComplete="off"
+            />
+
+            <label className="form-label">프로필 사진</label>
+            <div className="file-upload">
+              <label htmlFor="profileImage" className="file-upload-label">
+                <span className="material-symbols-outlined">
+                  image
+                </span>
+              </label>
+
+              <input
+                type="file"
+                id="profileImage"
+                accept="image/*"
+                name="profileImage"
+                onChange={handleProfileImageChange}
+              />
+            </div>
+            {profileImage ? (
+              <img
+                src={URL.createObjectURL(profileImage)}
+                alt="Profile"
+                className="profile-image-preview"
+              />
+            ) : null}
+
+            {error && <p className="error">{error}</p>}
+            <button className="sign-btn" type="submit">회원가입</button>
+          </form>
         </div>
-
-        <label htmlFor="payUrl">카카오페이 송금 링크(URL)</label>
-        <input
-          type="url"
-          id="payUrl"
-          name="payUrl"
-          value={payUrl}
-          onChange={(e) => setPayUrl(e.target.value)}
-          placeholder="카카오페이 링크"
-          autoComplete="off"
-        />
-
-        <label>프로필 사진</label>
-        <div className="file-upload">
-          <label htmlFor="profileImage" className="file-upload-label">
-            <span className="material-symbols-outlined">
-              image
-            </span>
-          </label>
-
-          <input
-            type="file"
-            id="profileImage"
-            accept="image/*"
-            name="profileImage"
-            onChange={handleProfileImageChange}
-          />
-        </div>
-        {profileImage ? (
-          <img
-            src={URL.createObjectURL(profileImage)}
-            alt="Profile"
-            className="profile-image-preview"
-          />
-        ) : null}
-
-        {error && <p className="error">{error}</p>}
-        <button className="sign-btn" type="submit">회원가입</button>
-      </form>
+      </div>
     </div>
   );
 };
