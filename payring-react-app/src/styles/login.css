@@ -1,14 +1,19 @@
 body{
-  overflow: hidden;
+  padding: 20px !important;
+  background: rgb(255, 255, 255) !important;
+  /* border-radius: 10px !important; */
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  max-width: 402px !important; /* 동일한 크기 유지 */
+  width: 90% !important;
+  margin: auto !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+  flex-grow: 1 !important; /* 컨텐츠가 아래로 확장되도록 설정 */
+  overflow:hidden;
 }
 
 /* 로그인 컨테이너 */
 .login-container {
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 402px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  height: 827px;
   border-radius: 8px;
   text-align: center;
   background-color: white;
@@ -50,23 +55,6 @@ input {
   width: 100%;
 }
 
-/* 버튼 기본 스타일 */
-button {
-  padding: 10px;
-  background-color: #D5EDD2;
-  color: black;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  width: 60%;
-  font-weight: bold;
-}
-
-/* 버튼 호버 효과 */
-button:hover {
-  background-color: #08313F;
-  color: white;
-}
 
 /* 페이지 네비게이션 버튼 */
 .PageNavigationButton {
@@ -164,68 +152,4 @@ button:hover {
   padding-top: 0px;
   padding-bottom: 0px;
   border-radius: 12px;
-}
-
-/* 개별 버튼 스타일 */
-.menu-button {
-  width: 100px;
-  height: 160px;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  background-color: white;
-}
-
-/* 버튼 호버 효과 */
-.menu-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* 아이콘 스타일 */
-.menu-button img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 12px;
-}
-
-/* 텍스트 중앙 정렬 */
-.menu-button span {
-  text-align: center;
-  line-height: 1.4;
-}
-
-/* 네비게이션 바 스타일 */
-nav {
-  width: 100%;
-  max-width: 402px;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  background: rgb(255, 255, 255);
-  padding: 12px 0;
-  border-top: 1px solid #ddd;
-}
-
-nav button {
-  background: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 14px;
-  color: #333;
-}
-
-nav button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
