@@ -11,12 +11,11 @@ import clear from "../../img/clear.png";
 const API_BASE_URL = "https://storyteller-backend.site";
 
 function StartSettlement() {
-    const { roomId: paramRoomId } = useParams(); // ✅ URL에서 roomId 가져오기
+    const { roomId: paramRoomId } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
-const { roomId: stateRoomId, roomName, userName = "user", teamEmails = [], moneyRecords = [] } = location.state || {}; // ✅ 중복 선언 제거
-const roomId = paramRoomId || stateRoomId; // ✅ 최종 roomId 결정 // ✅ URL 또는 상태에서 roomId 가져오기
-    
+    const { roomId: stateRoomId, roomName, userName = "user", teamEmails = [], moneyRecords = [] } = location.state || {};
+    const roomId = paramRoomId || stateRoomId;
 
     const [notReceived, setNotReceived] = useState([]);
     const [notSent, setNotSent] = useState([]);
@@ -26,20 +25,15 @@ const roomId = paramRoomId || stateRoomId; // ✅ 최종 roomId 결정 // ✅ UR
             const token = localStorage.getItem("accessToken");
             console.log("사용자 토큰:", token);
             console.log("방 ID 확인:", roomId);
-if (!roomId) {
-    console.error("🚨 roomId가 유효하지 않습니다. API 요청을 중단합니다.");
-    return;
-}
+            if (!roomId) {
+                console.error("🚨 roomId가 유효하지 않습니다. API 요청을 중단합니다.");
+                return;
+            }
 
             if (!token) {
                 console.error("🚨 액세스 토큰이 없습니다. 로그인 페이지로 이동합니다.");
                 alert("로그인이 필요합니다.");
                 navigate("/login");
-                return;
-            }
-
-            if (!roomId || roomId === "undefined") {
-                console.error("🚨 roomId가 유효하지 않습니다. API 요청을 중단합니다.");
                 return;
             }
 

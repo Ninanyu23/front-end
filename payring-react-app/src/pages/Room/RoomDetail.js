@@ -182,9 +182,17 @@ function RoomDetail() {
                 <div className="container">
                     <div className="room-header">
                         <h1 className="room-title">{roomName}의 정산방</h1>
-                        <button className="settlement-button" onClick={startSettlement}>
+                        <button
+                            className="settlement-button"
+                            onClick={() =>
+                                navigate(`/start-settlement/${roomId}`, { 
+                                    state: { roomId, roomName, teamMembers, payments }
+                                })
+                            }
+                        >
                             정산하기
                         </button>
+
                     </div>
 
                     <h3 className="team-title">{roomName}’s 팀원</h3>
