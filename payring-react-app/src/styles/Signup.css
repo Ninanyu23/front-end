@@ -1,40 +1,51 @@
-.signup-container {
-  overflow-y: auto;
-  max-height: 100vh;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  background-color: white;
+/* mobile-container 스타일 */
+.sign-container .mobile-container {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: center;  /* 가로 중앙 정렬 */
+  align-items: center;      /* 세로 중앙 정렬 */
+  overflow: hidden;         /* 페이지 전체 스크롤 숨기기 */
+  width: 100vw;
+  height: 100vh;
 }
 
-input[type="url"] {
-  width: 464px;
+/* signpage 스타일 */
+.signpage {
+  width: 90%;
+  max-width: 500px;          /* 폼의 최대 너비 설정 */
+  padding: 20px;
+  border-radius: 8px;        /* 둥근 모서리 */
+  max-height: 90vh;          /* 화면의 90% 높이를 차지 */
+  overflow-y: auto;          /* 세로 스크롤 활성화 */
+  overflow-x: hidden;        /* 가로 스크롤 비활성화 */
+}
+
+/* 모든 input 요소의 스타일 */
+input {
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #868686;
   background-color: #F9F9F9;
+  box-sizing: border-box; /* padding이 width에 포함되도록 설정 */
+}
+
+/* 특정 input 스타일 */
+input[type="url"] {
+  width: 100%;
 }
 
 .signup {
-  margin-top: 50px;
   text-align: left;
   font-size: 40px;
   font-weight: bold;
   color: #08313F;
 }
 
-input {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #868686;
-  background-color: #F9F9F9;
+.form-label {
+  margin-top: 30px;
 }
 
+/* input-group 스타일 */
 .input-group {
   display: flex;
   align-items: center;
@@ -42,44 +53,44 @@ input {
   margin-bottom: 0;
 }
 
+/* input-group 내부 input 요소 통일 */
 .input-group input {
   flex-grow: 1;
+  border-radius: 8px !important;
 }
 
+/* 버튼이 있는 경우에도 border-radius 통일 */
 .input-group button {
   flex-shrink: 0;
-  width: 120px;
+  width: 100px;
   padding: 10px;
   height: 40px;
   margin-top: 0;
+  border-radius: 8px; 
 }
 
+/* 은행명 & 계좌번호 입력 */
 .bank-name-input {
-  width: 50px;
+  width: 75px;
 }
 
 .account-number-input {
-  width: 250px;
+  width: 300px;
 }
 
 .bank-accounts-container {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
   margin-bottom: 10px;
 }
 
-.bank-input-group {
-  margin-bottom: -15px;
-}
-
+/* 인증번호 전송 버튼 */
 .send-code-btn {
   color: white;
   background-color: #08313F;
   border-radius: 8px;
   padding: 10px;
-  width: 120px;
-  height: 40px;
   cursor: pointer;
 }
 
@@ -88,14 +99,13 @@ input {
   background-color: white;
 }
 
+/* 인증 확인 버튼 */
 .verify-code-btn {
   background-color: #F9F9F9;
   color: #08313F;
   border: 1px solid #08313F;
   border-radius: 8px;
   padding: 10px;
-  width: 120px;
-  height: 40px;
   cursor: pointer;
 }
 
@@ -104,17 +114,18 @@ input {
   color: black;
 }
 
+/* 계좌 추가 버튼 */
 .add-account-btn {
+  width: 100%;
   padding: 10px;
   display: block;
   background-color: #F9F9F9;
   color: #868686;
-  width: 100%;
   border: dashed #868686;
   border-width: 1px;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .add-account-btn:hover {
@@ -122,12 +133,14 @@ input {
   color: black;
 }
 
+/* 에러 메시지 */
 .error {
   color: red;
   font-size: 14px;
   margin-top: 10px;
 }
 
+/* 파일 업로드 */
 .file-upload {
   display: flex;
   align-items: center;
@@ -141,8 +154,7 @@ input {
   cursor: pointer;
 }
 
-
-
+/* 프로필 이미지 미리보기 */
 .profile-image-preview {
   display: block;
   width: 200px;
@@ -158,6 +170,7 @@ input[type="file"] {
   display: none;
 }
 
+/* 회원가입 버튼 */
 .sign-btn {
   width: 50%;
   padding: 10px;

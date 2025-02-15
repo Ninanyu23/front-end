@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../styles/transfersend.css";
+import "../../styles/transfersend.css";
+import "../../styles/styles.css";
+import Header from "../../components/Header";
 
 // 쿠키에서 'token' 값을 가져오는 함수
 const getCookie = (name) => {
@@ -43,7 +45,7 @@ const TransferRecieve = ({ roomId }) => {
       if (!receivedRes.ok) {
         throw new Error('Received data fetch failed');
       }
-      
+
       const receivedData = await receivedRes.json();
       setReceivedTransfers(receivedData.data.receives);
 
@@ -53,7 +55,7 @@ const TransferRecieve = ({ roomId }) => {
       if (!notReceivedRes.ok) {
         throw new Error('Not received data fetch failed');
       }
-      
+
       const notReceivedData = await notReceivedRes.json();
       setNotReceivedTransfers(notReceivedData.data.notReceived);
     } catch (error) {
@@ -80,43 +82,48 @@ const TransferRecieve = ({ roomId }) => {
   };
 
   return (
-    <div className="transfer-status-container">
-      <h2>{`방 이름`}</h2>
+    <div className='mobile-container'>
+      <div className="header-wrapper">
+        <Header />
+      </div>
+      <div className="transfer-status-container">
+        <h2>{`방 이름`}</h2>
 
-      {/* 에러 메시지 표시 */}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        {/* 에러 메시지 표시 */}
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      <h3>아직 송금을 받지 않았어요!</h3>
-      {notReceivedTransfers.length === 0 ? (
-        <p>송금 받을 내역이 없습니다.</p>
-      ) : (
-        notReceivedTransfers.map((transfer) => (
-          <div key={transfer.transferId} className="pending-transfer">
-            <span>{transfer.sender}</span>
-            <span>{transfer.amount.toLocaleString()}원</span>
-            <button onClick={() => sendReminder(transfer.transferId)}>독촉하기</button>
-          </div>
-        ))
-      )}
-
-      <h3>정산 받은 내역</h3>
-      {receivedTransfers.length === 0 ? (
-        <p>받은 송금 내역이 없습니다.</p>
-      ) : (
-        receivedTransfers.map((transfer) => (
-          <div key={transfer.transferId} className="sent-transfer">
-            <div className="profile-section">
-              <img src={transfer.receiverImage} alt={transfer.receiverName} className="profile-image" />
-              <span>{transfer.receiverName}</span>
+        <h3>아직 송금을 받지 않았어요!</h3>
+        {notReceivedTransfers.length === 0 ? (
+          <p>송금 받을 내역이 없습니다.</p>
+        ) : (
+          notReceivedTransfers.map((transfer) => (
+            <div key={transfer.transferId} className="pending-transfer">
+              <span>{transfer.sender}</span>
+              <span>{transfer.amount.toLocaleString()}원</span>
+              <button onClick={() => sendReminder(transfer.transferId)}>독촉하기</button>
             </div>
-            <div className="transfer-message">
-              <p>{transfer.receiverName}님에게</p>
-              <p>{transfer.amount.toLocaleString()}원을 받았어요</p>
+          ))
+        )}
+
+        <h3>정산 받은 내역</h3>
+        {receivedTransfers.length === 0 ? (
+          <p>받은 송금 내역이 없습니다.</p>
+        ) : (
+          receivedTransfers.map((transfer) => (
+            <div key={transfer.transferId} className="sent-transfer">
+              <div className="profile-section">
+                <img src={transfer.receiverImage} alt={transfer.receiverName} className="profile-image" />
+                <span>{transfer.receiverName}</span>
+              </div>
+              <div className="transfer-message">
+                <p>{transfer.receiverName}님에게</p>
+                <p>{transfer.amount.toLocaleString()}원을 받았어요</p>
+              </div>
+              <img className="transfer-image" src={transfer.transferImage} alt="송금 이미지" />
             </div>
-            <img className="transfer-image" src={transfer.transferImage} alt="송금 이미지" />
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

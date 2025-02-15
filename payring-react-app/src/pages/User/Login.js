@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/login.css';
 import PageNavigationButton from '../../components/PageNavigate';
 import guest from '../../img/guest.png';
+import "../../styles/styles.css";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,67 +39,76 @@ const Login = () => {
 
       const data = await response.json();
 
-      console.log('로그인 응답 데이터:', data); // 응답 데이터 확인
+      console.log('로그인 응답:', data); // 응답 데이터 확인
+      console.log('HTTP 상태 코드:', response.status); // 응답 상태 확인
 
       if (response.ok) {
-        // 로그인 성공 시
         if (data.data && data.data.token) {
-          // 쿠키에 토큰 저장
+          // 토큰 저장
           document.cookie = `token=${data.data.token}; path=/; samesite=lax`;
-          console.log('토큰이 쿠키에 저장되었습니다.');
+          console.log('토큰이 쿠키에 저장되었습니다:', document.cookie);
 
-          // 마이페이지로 이동
+          // 페이지 이동
           window.location.href = '/main';
         } else {
-          console.error('응답에 토큰이 포함되지 않았습니다.');
+          console.error('응답에 토큰이 없습니다:', data);
+          setError('로그인 성공했지만 토큰이 없습니다.');
         }
       } else {
         setError(data.message || '로그인에 실패했습니다.');
+        console.error('로그인 실패:', data);
       }
     } catch (err) {
       setError('서버에 연결할 수 없습니다.');
-      console.error(err);
+      console.error('서버 연결 오류:', err);
     }
   };
 
   return (
-      <div className="login-container">
-        <div className="guest">
-          <img src={guest} alt="Guest Icon" />
-        </div>
-        <form onSubmit={handleLogin}>
-          <div>
-            <label htmlFor="email">이메일</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              placeholder="이메일을 입력하세요"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">비밀번호</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              placeholder="비밀번호를 입력하세요"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {error && <p className="error">{error}</p>}
-
-          <div className="button-container">
-            <div className="login-btn">
-              <button type="submit">로그인</button>
+    <div className='login-container'>
+      <div className="mobile-container">
+        <div className="content-wrapper">
+          <div className="loginpage">
+            <div className="guest">
+              <img src={guest} alt="Guest Icon" />
             </div>
-            <PageNavigationButton label="회원가입" to="/signup" />
+            <div className='form-container'>
+              <div className='input-form'>
+                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div>
+                    <label htmlFor="email">이메일</label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      placeholder="이메일을 입력하세요"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="password">비밀번호</label>
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      placeholder="비밀번호를 입력하세요"
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  {error && <p className="error">{error}</p>}
+                  <div className="button-container">
+                    <button type="submit" className="login-btn">로그인</button>
+                    <PageNavigationButton label="회원가입" className="sign-btn" to="/signup" />
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
+    </div>
   );
 };
 
