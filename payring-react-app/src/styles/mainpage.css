@@ -92,7 +92,46 @@ h2{
     margin-left: 10px;
 }
   
-  
+/* ✅ 토글 스위치 스타일 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4CAF50; /* ✅ 기본 ON 색상 */
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    transform: translateX(20px); /* ✅ 기본적으로 ON 상태 */
+}
+
+
 
   
 /*미정산 금액 확인*/
@@ -156,6 +195,7 @@ h2{
     font-size: 18px;
     padding-left: 20px;
 }
+
 
 /* 네비게이션 스타일 */
 .menu-container {

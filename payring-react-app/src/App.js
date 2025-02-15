@@ -34,10 +34,10 @@ function App() {
         <Route path="/transfer-send" element={<TransferSend />} />
 
         <Route path="/create-room" element={<CreateRoom/>} />
-        <Route path="/room-detail" element={<RoomDetail />} />
-        <Route path="/money-record" element={<MoneyRecord />} />
-        <Route path="/money-record-detail" element={<MoneyRecordDetail />} />
-        <Route path="/start-settlement" element={<StartSettlement />} />
+        <Route path="/room-detail/:id" element={<RoomDetail />} />
+        <Route path="/money-record/:id" element={<MoneyRecord />} />
+        <Route path="/money-record-detail/:paymentId" element={<MoneyRecordDetail />} />
+        <Route path="/start-settlement/:id" element={<StartSettlement />} />
       </Routes>
     </Router>
   );
