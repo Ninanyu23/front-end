@@ -1,0 +1,78 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .guest {
+    margin-bottom: 50px;
+  }
+  
+  .login-container {
+    width: 320px;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  label {
+    font-weight: 900;
+    display: block;
+    text-align: left;
+    margin-top:15px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border: 1px solid black;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px;
+  }
+  
+  .login-btn{
+    width: 100%;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #D5EDD2;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 60%;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #08313F;
+    color: white;
+  }
+  
+  .PageNavigationButton {
+    background-color: white;
+    color: #08313F;
+    border: 2px solid #08313F;
+  }
+  
+  .PageNavigationButton:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+  }

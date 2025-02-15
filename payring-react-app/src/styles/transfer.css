@@ -1,0 +1,111 @@
+.transfer-page {
+    width: 320px;
+    text-align: start;
+  }
+  
+  .kakao-btn {
+    background-color: white;
+    color: #3c1e1e;
+    width: 53%;
+    font-size: 12px;
+    border-radius: 30px;
+    box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.2);
+    display: inline-flex; /* 텍스트와 이미지를 나란히 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 텍스트와 이미지가 중앙에 위치하도록 */
+    gap: 7px; /* 이미지와 텍스트 사이 간격 조정 */
+  }
+  
+  .kakao-logo {
+    width: 40px; /* 고정된 크기로 로고 크기 조정 */
+    height: auto; /* 비율 유지 */
+  }
+  
+  .kakao-btn:hover {
+    color: #3c1e1e;
+    background-color: #d5edd2;
+  }
+  
+  .or-text {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 15px 0;
+  }
+  
+  .bank-info {
+    width: 100%; /* 가로 크기 고정 */
+    text-align: start;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+  }
+  
+  .bank-info span {
+    margin-right: 9%; /* 각 항목 사이의 간격 조정 */
+  }
+  
+  .upload-section {
+    margin-top: 20px; /* 계좌 정보와 이미지 업로드 간의 간격 조정 */
+    text-align: center; /* 이미지 아이콘을 가운데 정렬 */
+  }
+  
+  .upload-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d5edd2;
+    color: black;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    width: 50px; /* 아이콘 크기 설정 */
+    height: 50px;
+  }
+  
+  .upload-icon:hover {
+    background-color: #08313f;
+    color: white;
+  }
+  
+  .upload-icon .material-symbols-outlined {
+    font-size: 24px; /* 아이콘 크기 설정 */
+  }
+  
+  input[type="file"] {
+    display: none; /* 파일 선택 창을 숨기기 */
+  }
+  
+  .preview-image {
+    width: 100%;  /* bank-info와 동일한 가로 크기 */
+    height: 300px; /* 정사각형 유지 */
+    display: block;
+    margin: 10px auto;
+    object-fit: cover; /* 이미지가 비율 유지되면서 꽉 차게 표시 */
+    background-color: black; /* 빈 공간을 검은색으로 유지 */
+    border: 1px solid #ccc;
+  }
+  
+  .preview-image {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    background-color: black;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .transfer-btn {
+    display: block;
+    width: 100%;
+    background: #d5edd2;
+    color: black;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 30px;
+    box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .transfer-btn:hover {
+    background-color: #08313f;
+  }

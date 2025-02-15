@@ -1,0 +1,107 @@
+.status-page {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .total-amount, .pending-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .total-amount span, .pending-amount span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #023047;
+  }
+  
+  .settle-button {
+    background-color: #d4e9d7;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .settle-button:hover {
+    background-color: #c3e1c7;
+  }
+  
+  .filter-container {
+    margin-bottom: 10px;
+  }
+  
+  .filter-dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .room-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .room-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .room-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .room-info {
+    flex: 1;
+  }
+  
+  .room-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #023047;
+  }
+  
+  .room-amount {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .status-icon {
+    font-size: 24px;
+    margin-left: 10px;
+  }
+  
+  .status-icon.success {
+    color: #5cb85c;
+  }
+  
+  .status-icon.fail {
+    color: #d9534f;
+  }
+  
+  .notification-dot {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .money {
+    margin-left: 20px;
+  }
