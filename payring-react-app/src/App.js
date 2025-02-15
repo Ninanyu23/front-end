@@ -1,5 +1,5 @@
-import Signup from "./pages/SignUp";
-import Login from "./pages/Login";
+import Signup from "./pages/User/SignUp";
+import Login from "./pages/User/Login";
 import EditPage from "./pages/Editpage";
 import Invite from "./pages/Invite";
 import MyPage from "./pages/Mypage";
