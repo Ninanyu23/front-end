@@ -1,66 +1,59 @@
-import React, { useState } from 'react';
-import '../../styles/login.css';
-import PageNavigationButton from '../../components/PageNavigate';
-import guest from '../../img/guest.png';
+import React, { useState } from "react";
+import api from "../../components/axiosInstance";
+import "../../styles/login.css";
+import PageNavigationButton from "../../components/PageNavigate";
+import guest from "../../img/guest.png";
 import "../../styles/styles.css";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  // 쿠키에서 토큰을 가져오는 함수
-  const getCookie = (name) => {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    if (match) {
-      return match[2];
-    }
-    return null;
-  };
-
-  // 로그인 요청 함수
+  // ✅ 로그인 요청 함수
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError('이메일과 비밀번호를 모두 입력하세요.');
+      setError("이메일과 비밀번호를 모두 입력하세요.");
       return;
     }
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // 쿠키 인증 포함
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await api.post("/auth/login", { email, password });
 
-      const data = await response.json();
+      console.log("🔍 로그인 API 전체 응답:", response.data);
+      console.log("🔍 로그인 응답의 data:", response.data.data);
 
-      console.log('로그인 응답:', data); // 응답 데이터 확인
-      console.log('HTTP 상태 코드:', response.status); // 응답 상태 확인
+      // ✅ 정확한 위치에서 `token` 추출
+      const token = response.data.data?.token;
+      const refreshToken = response.data.data?.refreshToken;
 
-      if (response.ok) {
-        if (data.data && data.data.token) {
-          // 토큰 저장
-          document.cookie = `token=${data.data.token}; path=/; samesite=lax`;
-          console.log('토큰이 쿠키에 저장되었습니다:', document.cookie);
-
-          // 페이지 이동
-          window.location.href = '/main';
-        } else {
-          console.error('응답에 토큰이 없습니다:', data);
-          setError('로그인 성공했지만 토큰이 없습니다.');
-        }
-      } else {
-        setError(data.message || '로그인에 실패했습니다.');
-        console.error('로그인 실패:', data);
+      if (!token) {
+        console.error("❌ 로그인 응답에 토큰이 없습니다.");
+        setError("로그인 실패: 서버에서 토큰을 받지 못했습니다.");
+        return;
       }
-    } catch (err) {
-      setError('서버에 연결할 수 없습니다.');
-      console.error('서버 연결 오류:', err);
+
+      // ✅ 토큰 저장
+      localStorage.setItem("accessToken", token);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+      console.log("✅ 저장할 토큰:", token);
+      console.log("✅ 토큰이 localStorage에 저장되었습니다.");
+
+      localStorage.setItem("userEmail", email);
+      console.log("✅ 사용자 이메일이 localStorage에 저장되었습니다:", email);
+
+      // ✅ 페이지 이동
+      console.log("✅ 페이지 이동을 시도합니다.");
+      setTimeout(() => {
+        window.location.href = "/main";
+      }, 500);
+    } catch (error) {
+      setError("서버 오류: 로그인 실패");
+      console.error("❌ 로그인 요청 실패:", error);
     }
   };
 
