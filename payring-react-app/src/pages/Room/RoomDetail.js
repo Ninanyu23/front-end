@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
-import axios from "axios";
 import Header from "../../components/Header";
 import InviteModal from "../../components/InviteModal"; // ✅ 팀원 초대 모달 추가
 import DeleteConfirmModal from "../../components/DeleteConfirmModal"; // ✅ 삭제 확인 모달 추가
@@ -24,8 +23,14 @@ function RoomDetail() {
     const [isFetching, setIsFetching] = useState(false);
     const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
 
+    // 쿠키에서 token 가져오기
+    const getTokenFromCookie = () => {
+        const match = document.cookie.match(/(^| )token=([^;]+)/);
+        return match ? match[2] : null;
+    };
+
     useEffect(() => {
-        const token = localStorage.getItem("accessToken");
+        const token = getTokenFromCookie();
         if (!token) {
             alert("로그인이 필요합니다.");
             navigate("/login");
@@ -36,16 +41,24 @@ function RoomDetail() {
     const fetchTeamMembers = async () => {
         if (!roomId) return;
 
+        const token = getTokenFromCookie();
+        if (!token) return;
+
         try {
-            const token = localStorage.getItem("accessToken");
-            if (!token) return;
-
-            const response = await axios.get(`${API_BASE_URL}/api/rooms/${roomId}/members`, {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}/members`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+            const data = await response.json();
 
-            console.log("✅ 팀원 목록 조회 성공:", response.data);
-            setTeamMembers(response.data.data || []);
+            if (response.ok) {
+                console.log("✅ 팀원 목록 조회 성공:", data);
+                setTeamMembers(data.data || []);
+            } else {
+                console.error("🚨 팀원 목록 조회 실패:", data);
+            }
         } catch (error) {
             console.error("🚨 팀원 목록 조회 실패:", error);
         }
@@ -60,15 +73,23 @@ function RoomDetail() {
         if (!roomId) return;
 
         const fetchRoomName = async () => {
+            const token = getTokenFromCookie();
+            if (!token) return;
+
             try {
-                const token = localStorage.getItem("accessToken");
-                if (!token) return;
-
-                const response = await axios.get(`${API_BASE_URL}/api/rooms/${roomId}`, {
-                    headers: { Authorization: `Bearer ${token}` },
+                const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
+                const data = await response.json();
 
-                setRoomName(response.data.data.roomName || "정산방");
+                if (response.ok) {
+                    setRoomName(data.data.roomName || "정산방");
+                } else {
+                    console.error("🚨 방 정보 조회 실패:", data);
+                }
             } catch (error) {
                 console.error("🚨 방 정보 조회 실패:", error);
             }
@@ -82,17 +103,25 @@ function RoomDetail() {
         if (!roomId || isFetching) return;
         setIsFetching(true);
 
+        const token = getTokenFromCookie();
+        if (!token) return;
+
         try {
-            const token = localStorage.getItem("accessToken");
-            if (!token) return;
-
-            const response = await axios.get(`${API_BASE_URL}/api/rooms/${roomId}/payments`, {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}/payments`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+            const data = await response.json();
 
-            console.log("✅ 정산 요청 내역 응답:", response.data);
-            setTotalAmount(response.data.data.totalAmount || 0);
-            setPayments(Array.isArray(response.data.data.payments) ? response.data.data.payments : []);
+            if (response.ok) {
+                console.log("✅ 정산 요청 내역 응답:", data);
+                setTotalAmount(data.data.totalAmount || 0);
+                setPayments(Array.isArray(data.data.payments) ? data.data.payments : []);
+            } else {
+                console.error("🚨 정산 요청 내역 조회 실패:", data);
+            }
         } catch (error) {
             console.error("🚨 정산 요청 내역 조회 실패:", error);
         } finally {
@@ -123,21 +152,28 @@ function RoomDetail() {
     const handleConfirmDelete = async () => {
         if (!deleteTargetId) return;
 
+        const token = getTokenFromCookie();
+        if (!token) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
         try {
-            const token = localStorage.getItem("accessToken");
-            if (!token) {
-                alert("로그인이 필요합니다.");
-                return;
-            }
-
-            console.log(`🚀 DELETE 요청: ${API_BASE_URL}/api/rooms/payments/${deleteTargetId}`);
-
-            await axios.delete(`${API_BASE_URL}/api/rooms/payments/${deleteTargetId}`, {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await fetch(`${API_BASE_URL}/api/rooms/payments/${deleteTargetId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
-            console.log("✅ 정산 요청 삭제 성공");
-            fetchPayments();
+            if (response.ok) {
+                console.log("✅ 정산 요청 삭제 성공");
+                fetchPayments();
+            } else {
+                const data = await response.json();
+                console.error("❌ 정산 요청 삭제 실패:", data);
+                alert("정산 요청 삭제에 실패했습니다. 다시 시도해 주세요.");
+            }
         } catch (error) {
             console.error("❌ 정산 요청 삭제 실패:", error);
             alert("정산 요청 삭제에 실패했습니다. 다시 시도해 주세요.");
@@ -154,19 +190,28 @@ function RoomDetail() {
             return;
         }
 
+        const token = getTokenFromCookie();
+        if (!token) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
         try {
-            const token = localStorage.getItem("accessToken");
-            if (!token) {
-                alert("로그인이 필요합니다.");
-                return;
-            }
-
-            const response = await axios.post(`${API_BASE_URL}/api/rooms/${roomId}/payments/start`, {}, {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}/payments/start`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+            const data = await response.json();
 
-            console.log("✅ 정산 시작 성공:", response.data);
-            navigate(`/start-settlement/${roomId}`, { state: { roomId, roomName, teamMembers, payments } });
+            if (response.ok) {
+                console.log("✅ 정산 시작 성공:", data);
+                navigate(`/start-settlement/${roomId}`, { state: { roomId, roomName, teamMembers, payments } });
+            } else {
+                console.error("🚨 정산 시작 요청 실패:", data);
+                alert("정산 시작 요청에 실패했습니다.");
+            }
         } catch (error) {
             console.error("🚨 정산 시작 요청 실패:", error);
             alert("정산 시작 요청에 실패했습니다.");

@@ -1,23 +1,69 @@
-.status-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.payment-status-page{
+  margin-top: 30px;
+  width: 100%;
 }
 
-.pending-amount-container {
+.amount-container {
+  font-size: 25px;
+  font-weight: bold;
   display: flex;
-  align-items: center;
-  gap: 10px; /* 버튼과 금액 사이 여백 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
 }
+
+.settled-container{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* 왼쪽 정렬 */
+}
+
+.settled-container p {
+  margin-bottom: 2px; /* 수직 간격을 줄여줍니다 */
+  margin-top: 0px;
+}
+
+.unsettled-container p {
+  margin-bottom: 2px;
+  margin-top: 0px;
+}
+
+.unsettled-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* 왼쪽 정렬 */
+}
+
+.unsettled-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* 전체 너비 사용 */
+  align-items: center;
+}
+
+.money {
+  font-size: 30px;
+}
+
 
 .settle-button {
   background-color: #d4e9d7;
   border: none;
   padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 14px;
+  font-size: 20px;
   cursor: pointer;
+  display: flex;
+  /* 버튼을 오른쪽 정렬 */
+}
+
+.settle-button:hover {
+  background-color: #c3e1c7;
 }
 
 .flex-row {
@@ -26,82 +72,81 @@
   justify-content: space-between;
 }
 
-.settle-button:hover {
-  background-color: #c3e1c7;
+.filter-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
-  
-  .filter-container {
-    margin-bottom: 10px;
-  }
-  
-  .filter-dropdown {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .room-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .room-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .room-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
-  
-  .room-info {
-    flex: 1;
-  }
-  
-  .room-name {
-    font-size: 16px;
-    font-weight: bold;
-    color: #023047;
-  }
-  
-  .room-amount {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .status-icon {
-    font-size: 24px;
-    margin-left: 10px;
-  }
-  
-  .status-icon.success {
-    color: #5cb85c;
-  }
-  
-  .status-icon.fail {
-    color: #d9534f;
-  }
-  
-  .notification-dot {
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-  
-  .money {
-    margin-left: 20px;
-  }
+.drop-down {
+  cursor: pointer;
+  width: 30%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #023047;
+}
 
-  .payment-status-page{
-    width: 100%;
-  }
+.line {
+  width: 80%;
+}
+
+
+.room-list {
+  list-style: none;
+  padding: 0;
+}
+
+.room-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.room-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.room-info {
+  flex: 1;
+}
+
+.room-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #023047;
+}
+
+.room-amount {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status-icon {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.status-icon.success {
+  color: #5cb85c;
+}
+
+.status-icon.fail {
+  color: #d9534f;
+}
+
+.notification-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 5px;
+}

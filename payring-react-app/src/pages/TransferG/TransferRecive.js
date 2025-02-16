@@ -29,8 +29,7 @@ const fetchWithAuth = async (url, options = {}) => {
 };
 
 const TransferRecieve = ({ roomId }) => {
-  const [receivedTransfers, setReceivedTransfers] = useState([]);
-  const [notReceivedTransfers, setNotReceivedTransfers] = useState([]);
+  const [transfers, setTransfers] = useState([]); // 모든 송금 내역을 하나의 상태로 관리
   const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 추가
 
   useEffect(() => {
@@ -39,25 +38,15 @@ const TransferRecieve = ({ roomId }) => {
 
   const fetchTransfers = async () => {
     try {
-      // 'received' API 호출
-      const receivedRes = await fetchWithAuth(`/api/rooms/${roomId}/transfers/receive`);
+      // '/api/rooms/{roomId}/transfers/send' API 호출
+      const res = await fetchWithAuth(`/api/rooms/${roomId}/transfers/send`);
 
-      if (!receivedRes.ok) {
-        throw new Error('Received data fetch failed');
+      if (!res.ok) {
+        throw new Error('송금 내역을 불러오는 데 실패했습니다.');
       }
 
-      const receivedData = await receivedRes.json();
-      setReceivedTransfers(receivedData.data.receives);
-
-      // 'not-received' API 호출
-      const notReceivedRes = await fetchWithAuth(`/api/rooms/${roomId}/transfers/not-received`);
-
-      if (!notReceivedRes.ok) {
-        throw new Error('Not received data fetch failed');
-      }
-
-      const notReceivedData = await notReceivedRes.json();
-      setNotReceivedTransfers(notReceivedData.data.notReceived);
+      const data = await res.json();
+      setTransfers(data.data.transfers); // 모든 송금 내역을 상태로 설정
     } catch (error) {
       console.error("Error fetching transfer data", error);
       setErrorMessage("송금 내역을 불러오는 데 실패했습니다."); // 에러 메시지 상태 업데이트
@@ -81,8 +70,12 @@ const TransferRecieve = ({ roomId }) => {
     }
   };
 
+  // 송금 받은 내역과 송금을 받지 않은 내역을 구분
+  const receivedTransfers = transfers.filter(transfer => transfer.status === "received");
+  const notReceivedTransfers = transfers.filter(transfer => transfer.status === "not-received");
+
   return (
-    <div className='mobile-container'>
+    <div className="mobile-container">
       <div className="header-wrapper">
         <Header />
       </div>
@@ -92,6 +85,7 @@ const TransferRecieve = ({ roomId }) => {
         {/* 에러 메시지 표시 */}
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
+        {/* 송금을 받지 않은 내역 */}
         <h3>아직 송금을 받지 않았어요!</h3>
         {notReceivedTransfers.length === 0 ? (
           <p>송금 받을 내역이 없습니다.</p>
@@ -105,6 +99,7 @@ const TransferRecieve = ({ roomId }) => {
           ))
         )}
 
+        {/* 송금 받은 내역 */}
         <h3>정산 받은 내역</h3>
         {receivedTransfers.length === 0 ? (
           <p>받은 송금 내역이 없습니다.</p>

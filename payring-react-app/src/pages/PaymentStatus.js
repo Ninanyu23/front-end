@@ -59,29 +59,37 @@ const PaymentStatus = () => {
         <Header />
       </div>
       <div className="payment-status-page">
-        <div className="content-wrapper flex-row">
-          <div>
-            <p>
-              정산 금액 <strong className="money">{totalSettledAmount.toLocaleString()} 원</strong>
-            </p>
-            <p>
-              미정산 금액 <strong className="money">{unSettledAmount.toLocaleString()} 원</strong>
-            </p>
-          </div>
-          <button className="settle-button">정산 하기</button>
-        </div>
-        <hr />
         <div className="content-wrapper">
-          <select
-            name="dropdown"
-            value={period}
-            onChange={(e) => setPeriod(Number(e.target.value))}
-          >
-            <option value={1}>1주일</option>
-            <option value={4}>1개월</option>
-            <option value={12}>3개월</option>
-            <option value={0}>전체</option>
-          </select>
+          <div className="amount-container">
+            <div className="settled-container">
+              <p>정산 금액</p>
+              <p><strong className="money">{totalSettledAmount.toLocaleString()} 원</strong></p>
+            </div>
+            <div className="unsettled-container">
+              <p>미정산 금액</p>
+              <div className="unsettled-bottom">
+                <p><strong className="money">{unSettledAmount.toLocaleString()} 원</strong></p>
+                <button className="settle-button">정산 하기</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <hr className="line" />
+        <div className="content-wrapper">
+          <div className="filter-container">
+            <select
+              className="drop-down"
+              name="dropdown"
+              value={period}
+              onChange={(e) => setPeriod(Number(e.target.value))}
+            >
+              <option value={1}>1주일</option>
+              <option value={4}>1개월</option>
+              <option value={12}>3개월</option>
+              <option value={0}>전체</option>
+            </select>
+          </div>
           <ul className="payment-list">
             {payments.map((payment) => (
               <li key={payment.roomId} className="payment-item">
