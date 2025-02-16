@@ -11,7 +11,8 @@
     border: 3px solid #d4e9d6;
     border-radius: 30px;
     padding: 10px;
-    width: 100%;
+    width: 90%;
+    margin-left: 7px;
     margin-bottom: 20px;
     box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1);
 }
@@ -37,32 +38,37 @@
 }
 
 .invite-buttons {
-    width: 150px;
+    display: flex; /* ✅ 추가 */
     flex-direction: column;
-    gap: 5px;
-    margin-right: -20px;
+    align-items: center; /* 버튼을 가운데 정렬 */
+    width: 40%; /* 버튼 컨테이너 너비 조정 */
 }
 
 .accept-btn {
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
     background: #d4e9d6;
     color: #08313F;
     border: solid #d4e9d6;
-    padding: 5px 10px;
     border-radius: 25px;
     cursor: pointer;
     margin-bottom: 10px;
 }
 
 .accept-btn:hover {
+    color: white;
     border: solid #08313F;
     background-color: #08313F;
 }
 
 .reject-btn {
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
     background: #08313F;
     color: white;
     border: solid #08313F;
-    padding: 5px 10px;
     border-radius: 25px;
     cursor: pointer;
 }

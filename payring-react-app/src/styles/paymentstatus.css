@@ -1,39 +1,35 @@
-.status-page {
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .status-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .total-amount, .pending-amount {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .total-amount span, .pending-amount span {
-    font-size: 24px;
-    font-weight: bold;
-    color: #023047;
-  }
-  
-  .settle-button {
-    background-color: #d4e9d7;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .settle-button:hover {
-    background-color: #c3e1c7;
-  }
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.pending-amount-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 버튼과 금액 사이 여백 */
+}
+
+.settle-button {
+  background-color: #d4e9d7;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settle-button:hover {
+  background-color: #c3e1c7;
+}
+
   
   .filter-container {
     margin-bottom: 10px;
@@ -104,4 +100,8 @@
   
   .money {
     margin-left: 20px;
+  }
+
+  .payment-status-page{
+    width: 100%;
   }

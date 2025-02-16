@@ -28,7 +28,7 @@ const Invite = () => {
                     return;
                 }
 
-                const response = await fetch('https://storyteller-backend.site/api/rooms/invitations', {
+                const response = await fetch('/api/rooms/invitations', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -60,7 +60,14 @@ const Invite = () => {
                 return;
             }
 
-            const response = await fetch(`https://storyteller-backend.site/api/rooms/invitations/${id}/accept`, {
+            // 초대 목록에서 roomId를 가져오기
+            const invite = invites.find(invite => invite.id === id);
+            if (!invite) {
+                alert('초대를 찾을 수 없습니다.');
+                return;
+            }
+
+            const response = await fetch(`/api/rooms/${invite.roomId}/accept`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -90,7 +97,14 @@ const Invite = () => {
                 return;
             }
 
-            const response = await fetch(`https://storyteller-backend.site/api/rooms/invitations/${id}/reject`, {
+            // 초대 목록에서 roomId를 가져오기
+            const invite = invites.find(invite => invite.id === id);
+            if (!invite) {
+                alert('초대를 찾을 수 없습니다.');
+                return;
+            }
+
+            const response = await fetch(`/api/rooms/${invite.roomId}/reject`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
